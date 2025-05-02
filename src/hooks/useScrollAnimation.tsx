@@ -46,3 +46,29 @@ export function useScrollAnimation({
 
   return { ref, isVisible };
 }
+
+export function useScrollToTop() {
+  const [showButton, setShowButton] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show button when user scrolls down 300px
+      setShowButton(window.scrollY > 300);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+  
+  return { showButton, scrollToTop };
+}

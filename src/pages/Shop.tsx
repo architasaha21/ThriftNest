@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -7,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Filter, ShoppingBag } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
+import BackToTop from '@/components/BackToTop';
 
 // Mock category data
 const categories = [
@@ -252,6 +252,7 @@ const Shop = () => {
         </div>
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 };
