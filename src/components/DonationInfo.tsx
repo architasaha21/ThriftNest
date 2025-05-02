@@ -2,13 +2,27 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Calendar, Truck } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const DonationInfo = () => {
+  const { ref: leftRef, isVisible: leftVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { ref: rightRef, isVisible: rightVisible } = useScrollAnimation({ 
+    threshold: 0.1,
+    rootMargin: "0px 0px -100px 0px"
+  });
+
   return (
     <section className="py-16 bg-thrift-green text-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
+          <div 
+            ref={leftRef as React.RefObject<HTMLDivElement>}
+            className={`transition-all duration-1000 ${
+              leftVisible 
+                ? 'opacity-100 translate-x-0' 
+                : 'opacity-0 -translate-x-10'
+            }`}
+          >
             <h2 className="text-3xl md:text-4xl font-bold font-lora mb-6">Give Your Clothes a Second Life</h2>
             <p className="text-thrift-gray/90 mb-8">
               Your pre-loved items can find a new home while helping reduce textile waste.
@@ -57,7 +71,14 @@ const DonationInfo = () => {
             </div>
           </div>
           
-          <div className="relative">
+          <div 
+            ref={rightRef as React.RefObject<HTMLDivElement>}
+            className={`relative transition-all duration-1000 ${
+              rightVisible 
+                ? 'opacity-100 translate-x-0' 
+                : 'opacity-0 translate-x-10'
+            }`}
+          >
             <div className="bg-thrift-beige rounded-lg p-8 relative z-10">
               <h3 className="text-2xl font-bold text-thrift-green font-lora mb-4">Donation Process</h3>
               <ol className="space-y-6">

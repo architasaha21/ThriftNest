@@ -2,12 +2,22 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const HeroSection = () => {
+  const { ref, isVisible } = useScrollAnimation({ once: true });
+
   return (
     <section className="bg-thrift-green text-white relative overflow-hidden">
       <div className="container mx-auto px-4 py-16 md:py-28">
-        <div className="max-w-2xl relative z-10">
+        <div 
+          ref={ref as React.RefObject<HTMLDivElement>}
+          className={`max-w-2xl relative z-10 transition-all duration-1000 ${
+            isVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-10'
+          }`}
+        >
           <h1 className="text-4xl md:text-6xl font-bold mb-6 font-lora leading-tight">
             Sustainable Style<br />Starts Here
           </h1>
